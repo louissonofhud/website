@@ -1,0 +1,118 @@
+<!-- Put each tab in accordian -->
+<!-- Rewrite what is in each tab -->
+ 
+
+{% extends "main/base.html" %}
+{% block head %}  
+    <title>Louis Hudson - CV</title>
+    <style>
+    header {
+      background: #f8f8f8;
+      padding: 2rem;
+      text-align: center;
+    }
+    header h1 { margin: 0; font-size: 2rem; }
+    header p { margin: 0.5rem 0; font-size: 1rem; }
+    .download-btn {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      background: #0073e6;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 4px;
+    }
+    section { margin-bottom: 2rem; }
+    h2 { border-bottom: 2px solid #eee; padding-bottom: 0.5rem; }
+    .roles { margin: 1rem 0; }
+    .role { margin-bottom: 1.5rem; }
+    .role h3 { margin: 0; font-size: 1.2rem; }
+    .role time { font-style: italic; color: #666; }
+    ul { margin: 0.5rem 0 0.5rem 1.5rem; }
+    footer {
+      text-align: center;
+      padding: 1rem 0;
+      background: #f8f8f8;
+      font-size: 0.9rem;
+    }
+    </style>
+{% endblock %}
+
+
+{% block content %}
+    <header>
+      <h1>Louis Hudson</h1>
+      <p>Data Engineer at Bloomberg | First-Class BSc Computer Science, University of Exeter</p>
+      <p>London, UK • <a href="mailto:youremail@example.com">youremail@example.com</a> • (phone number)</p>
+      <a class="download-btn" href="#">Download PDF</a>
+    </header>
+    <section id="summary">
+      <h2>Professional Summary</h2>
+      <p>First-class Computer Science graduate and Data Engineer at Bloomberg with four years of progressive experience—beginning as an apprentice at 18 and now building robust data pipelines in the 3rd Party Indices team. Expert in Python, SQL, ETL, data modelling, and CI/CD, with a proven track record of mentoring peers, leading apprentice-wide initiatives, and delivering high-quality data quality solutions.</p>
+    </section>
+    <section id="skills">
+      <h2>Technical Skills</h2>
+      <ul>
+        <li><strong>Programming:</strong> Python, SQL</li>
+        <li><strong>Tools &amp; Frameworks:</strong> Git, Bloomberg Terminal, Django</li>
+        <li><strong>Data &amp; Engineering:</strong> ETL development, data modelling, testing, CI/CD pipelines</li>
+      </ul>
+    </section>
+    <section id="education">
+      <h2>Education</h2>
+      <p><strong>University of Exeter</strong>, Exeter, UK<br>
+      BSc Computer Science, First Class Honours<br>
+      Graduated June 2025</p>
+      <p><strong>A-Levels:</strong> Spanish (A*), Mathematics (A*), Computer Science (A*)</p>
+    </section>
+    <section id="experience">
+      <h2>Professional Experience</h2>
+      <div class="roles">
+        <div class="role">
+          <h3>Data Engineer, 3rd Party Indices Team</h3>
+          <time>June 2025 – Present</time>
+          <ul>
+            <li>Design and implement scalable data pipelines for third-party index data.</li>
+            <li>Collaborate with analysts to translate business requirements into reliable ETL workflows and automated quality checks.</li>
+            <li>Integrate new data sources (e.g., Stoxx) into the Bloomberg Terminal, ensuring seamless onboarding and validation.</li>
+          </ul>
+        </div>
+        <div class="role">
+          <h3>Index Data Analyst (3rd Party Indices Specialisation)</h3>
+          <time>2022 – 2025</time>
+          <ul>
+            <li>Developed and deployed an accuracy measurement service for pricing datasets to monitor data quality across indices.</li>
+            <li>Built a random-sampling data-validation service to detect anomalies proactively.</li>
+            <li>Managed end-to-end onboarding of Stoxx index data onto the Bloomberg Terminal, coordinating across vendor and internal teams.</li>
+          </ul>
+        </div>
+        <div class="role">
+          <h3>Financial Data Analyst (Apprentice)</h3>
+          <time>2021 – 2022</time>
+          <ul>
+            <li><strong>Back-up Tech Lead:</strong> Contributed production Python code and debugged internal tools; mentored colleagues on Python best practices and Git workflows.</li>
+            <li>Authored an FFM news article on the UK Conservative leadership election for internal distribution.</li>
+            <li>Led new-hire training sessions on the Bloomberg data model, shortening ramp-up time by 20%.</li>
+            <li>Provided in-depth customer support, resolving client inquiries on Bloomberg Terminal data in a timely manner.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    <section id="extracurricular">
+      <h2>Leadership &amp; Extracurricular</h2>
+      <p><strong>Apprentice Committee Lead</strong> (Final Year)<br>
+      Organized social and professional events for Bloomberg apprentices, fostering community and peer support across cohorts.</p>
+    </section>
+    <section id="projects">
+      <h2>Projects</h2>
+      <p>(Insert your key projects here with titles, tech stack, descriptions, and links.)</p>
+    </section>
+    <section id="languages">
+      <h2>Languages</h2>
+      <ul>
+        <li>Spanish: Conversational</li>
+      </ul>
+    </section>
+{% endblock %}
+</body>
+</html>
