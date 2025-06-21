@@ -1,3 +1,4 @@
 Refactor blog to its own app
 Make blog look nice
 Projects
+Rewrite CV
