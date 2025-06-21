@@ -6,6 +6,7 @@ class BlogPost(models.Model):
     Model representing a blog post.
     """
     title = models.CharField(max_length=200)
+    post_id = models.CharField(max_length=30)  # Unique identifier for each post
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -18,3 +19,17 @@ class BlogPost(models.Model):
 
     def __str__(self):
         return self.title
+
+    def save(self, *args, **kwargs):
+        """
+        Override save method to ensure post_id is unique.
+        """
+        if not self.post_id:
+            self.post_id = f"self.id"
+        self.post_id = self.post_id.replace(" ", "_").lower()
+        if BlogPost.objects.filter(post_id=self.post_id).exists():
+            self.post_id += "_" + str(self.id)
+        instance = super(BlogPost, self).save(*args, **kwargs)
+        image = PIL.Image.open(instance.img.path)
+        image.save(instance.photo.path, quality=20, optimize=True)
+        return instance

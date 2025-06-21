@@ -7,10 +7,11 @@ class BlogPostForm(forms.ModelForm):
     """
     class Meta:
         model = BlogPost
-        fields = ['title', 'content', 'private', 'image1', 'image2', 'image3', 'image4']
+        fields = ['title', 'content', "post_id",'private', 'image1', 'image2', 'image3', 'image4']
         widgets = {
             'content': forms.Textarea(attrs={'rows': 10, 'cols': 40}),
             'title': forms.TextInput(attrs={'placeholder': 'Enter the title of your blog post'}),
+            'post_id': forms.TextInput(attrs={'placeholder': 'Enter the title of your blog post'}),
             'private': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
             'image1': forms.ClearableFileInput(attrs={'class': 'form-control-file'}),
             'image2': forms.ClearableFileInput(attrs={'class': 'form-control-file'}),
@@ -20,6 +21,7 @@ class BlogPostForm(forms.ModelForm):
         labels = {
             'title': 'Headline',
             'content': "Thought content",
+            'post_id': "Link ID",
             'private': 'Private post',
             'image1': 'Upload an Image',
             'image2': 'Upload an Image',
