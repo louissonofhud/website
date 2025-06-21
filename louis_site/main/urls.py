@@ -12,5 +12,6 @@ urlpatterns = [
     path("blog/", views.blog, name="blog"), # List all blog posts
     path("blog/add_post", views.create_blog_post, name="add_blog_post"), # Create a new blog post
     path("blog/<str:post_id>", views.blog_post, name="post_detail"), # Display a specific blog post
+    path("error/", views.error, name="error"), # Error page
     # path("blog/edit_post/<int:post_id>", views.add_blog_post, name="edit_blog_post"), # Edit an existing blog post
 ] 

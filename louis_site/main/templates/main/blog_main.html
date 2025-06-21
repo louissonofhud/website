@@ -20,11 +20,14 @@
 {% block content %}
     <div class="container">
         <h1>Blog Posts</h1>
-        <form method="post" class="no-background">
-            {% csrf_token %} 
-            <button type="submit", name="Create", value="goto",class="btn btn-primary">Create post</button>
-        </form>
+        {% if user.is_staff %}
+            <form method="post" class="no-background">
+                {% csrf_token %} 
+                <button type="submit", name="Create", value="goto",class="btn btn-primary">Create post</button>
+            </form>
+        {% endif %}
         {% for post in posts %}
+
             <div class="blog-post">
                 <h2>{{ post.title }}</h2>
                 <p><strong>Published on:</strong> {{ post.published_date }}</p>

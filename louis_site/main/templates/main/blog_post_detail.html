@@ -1,0 +1,40 @@
+{% extends "main/base.html" %}
+{% block head %}
+    <title>{{ post.title }}</title>
+    <style>
+        .post-detail {
+            margin: 2rem auto;
+            max-width: 800px;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .post-detail h1 {
+            margin-top: 0;
+        }
+        .post-detail p {
+            margin: 0.5rem 0;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="container post-detail">
+        <h1>{{ post.title }}</h1>
+        <p><strong>Published on:</strong> {{ post.published_date }}</p>
+        <p>{{ post.content }}</p>
+        
+        {% for image in post.all_images %} 
+            <a href={{image.url}}><img src="{{image.url}}" alt="Post Image" class="img-fluid" style="max-width: 100%; height: auto;"></a>
+        {% empty %}
+            <p>No images available for this post.</p>
+        {% endfor %}
+
+        {% if user.is_staff %}
+            <form method="post" class="no-background">
+                {% csrf_token %}
+                <button type="submit" name="Edit" value="{{ post.post_id }}" class="btn btn-primary">Edit Post</button>
+            </form>
+        {% endif %}
+    </div>
+{% endblock %}

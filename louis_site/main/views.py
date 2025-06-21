@@ -1,8 +1,14 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import user_passes_test, login_required
 from django.urls import reverse
 
 from .forms import BlogPostForm
 from .models import BlogPost
+
+# Helper functions
+
+def staff_required(user):
+    return user.is_authenticated and user.is_staff
 
 # Create your views here.
 def index(response):
@@ -17,6 +23,7 @@ def cv(response):
     """
     return render(response, "main/cv.html")
 
+@user_passes_test(staff_required, login_url='home')
 def create_blog_post(response):
     """
     Render the add blog post page.
@@ -29,27 +36,37 @@ def create_blog_post(response):
 
     else:
         form = BlogPostForm()
-    return render(response, "main/create_post.html", {"form": form})
+    return render(response, "main/blog_create_post.html", {"form": form})
 
 def blog(response):
     """
     Render the blog page with a list of blog posts.
     """
-    posts = BlogPost.objects.all().order_by('-created_at')  # Order by creation date, newest first
+    if not response.user.is_authenticated:
+        posts = BlogPost.objects.filter(private=False).order_by('-created_at')
+    else:
+        posts = BlogPost.objects.all().order_by('-created_at')
     if response.method == "POST" and response.POST.get("Create") == "goto":
         return redirect(reverse("add_blog_post"))
-    return render(response, "main/blog.html", {"posts": posts})
+    return render(response, "main/blog_main.html", {"posts": posts})
 
 def blog_post(response, post_id):
     """
     Render a specific blog post.
     """
-    try:
-        post = BlogPost.objects.get(post_id=post_id)
-    except BlogPost.DoesNotExist:
-        return render(response, "main/404.html", {"message": "Blog post not found."})
+    post = BlogPost.objects.get(post_id=post_id)
+    if not post:
+        return render(response, "main/error.html", {"message": "This blog post not found."})
+    elif post.private and not response.user.is_authenticated:
+        return render(response, "main/error.html", {"message": "No access to view this post - please log in."})
 
-    return render(response, "main/post_detail.html", {"post": post})
+    return render(response, "main/blog_post_detail.html", {"post": post})
+
+def error(response):
+    """
+    Render the error page.
+    """
+    return render(response, "main/error.html", {"message": "Unknown error, please reach out via the contact form."})
 
 def logout(response):
     return render(

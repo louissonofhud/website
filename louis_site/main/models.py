@@ -1,4 +1,7 @@
 from django.db import models
+from django.core.exceptions import ValidationError
+import PIL
+from io import BytesIO
 
 # Create your models here.
 class BlogPost(models.Model):
@@ -6,7 +9,7 @@ class BlogPost(models.Model):
     Model representing a blog post.
     """
     title = models.CharField(max_length=200)
-    post_id = models.CharField(max_length=30)  # Unique identifier for each post
+    post_id = models.CharField(max_length=30, null=True, blank=True)  # Unique identifier for each post
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -24,12 +27,42 @@ class BlogPost(models.Model):
         """
         Override save method to ensure post_id is unique.
         """
-        if not self.post_id:
-            self.post_id = f"self.id"
-        self.post_id = self.post_id.replace(" ", "_").lower()
-        if BlogPost.objects.filter(post_id=self.post_id).exists():
-            self.post_id += "_" + str(self.id)
-        instance = super(BlogPost, self).save(*args, **kwargs)
-        image = PIL.Image.open(instance.img.path)
-        image.save(instance.photo.path, quality=20, optimize=True)
-        return instance
+
+        if not self.post_id and len(self.title) < 31:
+            self.post_id = self.title
+
+        if self.post_id:
+            self.post_id = self.post_id.lower().replace(" ", "_").replace("-", "_")
+        else:
+            self.post_id = ""
+        super().save(*args, **kwargs)  # Call the original save method to get the ID
+
+        if len(BlogPost.objects.filter(post_id=self.post_id)) > 1 or not self.post_id:
+            # If the post_id already exists or is empty, append the post ID to make it unique
+            self.post_id += str(self.id)
+
+        super().save(update_fields=["post_id"])
+
+        for image_field in ['image1', 'image2', 'image3', 'image4']:
+            image = getattr(self, image_field)
+            if image and hasattr(image_field, 'path'):
+                # Open the image using PIL to ensure it's a valid image
+                try:
+
+                    with PIL.Image.open(image.path) as img:
+                        if img.mode != "RGB":
+                            img = img.convert("RGB")  # Convert to RGB if not already
+
+                    buffer = BytesIO()
+                    img.save(buffer, format='JPEG', quality=70, optimize=True)
+                    buffer.seek(0)
+                
+                    new_image = ContentFile(buffer.read(), name=image_field.name.split('/')[-1])
+                    setattr(self, field_name, new_image)
+                except Exception as e:
+                    raise ValidationError(f"Invalid image file for {image_field}: {e}")
+        super().save(*args, **kwargs)
+
+    @property
+    def all_images(self):
+        return [img for img in [self.image1, self.image2, self.image3, self.image4] if img]
