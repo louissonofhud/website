@@ -2,13 +2,13 @@
 {% load static %}
 <html lang="en">
     <head>
+        {% block head %}
+        {% endblock %}
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <title>Louis Hudson - CV</title>
         <link rel="stylesheet" href="{% static 'main/style.css' %}">
-        {% block head %}
-        {% endblock %}
     </head>
     <body>
         <div id="hamburger">
@@ -34,12 +34,21 @@
                 {% else %}
                 <li><a href="/login">Login</a></li>
                 {% endif %}
-
-
+                
+                
             </ul>
         </nav>
-
+        
         <main>
+            {% if messages %}
+                <div class="message-container">
+                    {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">
+                        {{ message }}
+                    </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
             {% block content %}
             {% endblock %}
         </main>

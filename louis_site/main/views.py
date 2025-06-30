@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib import messages
 from django.contrib.auth.decorators import user_passes_test, login_required
 from django.urls import reverse
 
@@ -75,3 +76,11 @@ def logout(response):
         {
             "name": "Logout",
         })
+
+def delete_post(response, issue_id):
+    if response.method == "POST":
+        if response.POST.get("delete-button") == "delete-confirmed":
+            post_to_del = BlogPost.objects.get(id=issue_id)
+            post_to_del.delete()
+            messages.success(response, "Post deleted")
+    return redirect(reverse("blog"))

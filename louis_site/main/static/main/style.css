@@ -83,4 +83,132 @@ main {
     background-color: #555;
 }
 
+.blog-post {
+    width: 100%;
+    max-width: 800px;
+    padding: 1.3rem;
+    margin-top: 20px;
+    /* margin-bottom: 1.8rem; */
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    overflow-wrap: break-word; 
+    background-color: #fdfdfd;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
 
+.blog-post p {
+    margin: 0.5rem 0;
+}
+
+.blog-post h2 {
+    margin: 0.5rem 0;
+}
+
+.post-detail {
+  width: 100%;
+  padding: 20px;
+  border-radius: 8px;
+  overflow-wrap: break-word;
+  font-family: Arial, sans-serif;
+}
+
+.post-dates p {
+  margin-bottom: 0.5rem;
+}
+
+.post-detail h1 {
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+}
+
+/* body {
+    background-color: #f9f9f9;
+} */
+
+#blog-head {
+    font-size: 3rem;
+}
+
+#small-date {
+    font-size: 0.85rem;
+    color: #888;
+    margin-bottom: 0.5rem;
+}
+
+.blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.3rem;
+    align-items: start;
+    margin-bottom: 0.82rem;
+}
+
+.blog-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 1.3rem;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 0.82rem;
+}
+
+.blog-post-content {
+    font-size: 1.1rem;
+}
+
+.delete-button {
+    margin: 20px 0;
+}
+
+/* Match Bootstrap button styling */
+.expandable-header {
+    display: inline-block;
+    font-weight: 400;
+    color: #fff;
+    background-color: #dc3545;
+    border: 1px solid #dc3545;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0.375rem;
+    transition: color 0.15s ease-in-out,
+                background-color 0.15s ease-in-out,
+                border-color 0.15s ease-in-out,
+                box-shadow 0.15s ease-in-out;
+    cursor: pointer;
+}
+
+.expandable-header:hover {
+    background-color: #bb2d3b;
+    border-color: #b02a37;
+}
+
+/* Toggle area styling */
+.delete-confirmation {
+    max-height: 0;
+    overflow: hidden;
+    padding: 0 10px;
+    background-color: #fff;
+    border-top: none;
+    transition: max-height 0.3s ease-out, padding 0.3s ease-out, border-top 0.3s ease-out;
+}
+
+.delete-confirmation.open {
+    /* border-top: 1px solid #ccc; */
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.alert {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px 0;
+    transition: opacity 0.8s ease-out
+  }
+
+  .alert.fade-out {
+    opacity: 0;
+  }
