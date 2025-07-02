@@ -61,7 +61,13 @@ def blog_post(response, post_id):
     elif post.private and not response.user.is_authenticated:
         return render(response, "main/error.html", {"message": "No access to view this post - please log in."})
 
-    return render(response, "main/blog_post_detail.html", {"post": post})
+    comments = post.comments.all()
+    top_level_comments = comments.filter(parent=None)
+    comment_dict = {}
+    for com in top_level_comments:
+        comment_dict[com] = [rep for rep in comments.filter(parent=com)]
+
+    return render(response, "main/blog_post_detail.html", {"post": post, "comments": comment_dict})
 
 def error(response):
     """

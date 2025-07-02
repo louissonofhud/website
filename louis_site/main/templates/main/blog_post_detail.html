@@ -15,6 +15,25 @@
         {% for image in post.all_images %} 
             <a href={{image.url}}><img src="{{image.url}}" alt="Post Image" class="img-fluid" style="max-width: 100%; height: auto;"></a>
         {% endfor %}
+    </div>
+    <hr class="solid">
+    <div class="comments-section">
+        <h2>Comments</h2>
+        {% for comment, replies in comments.items %}
+            <div class="comment">
+                <p><strong>{{ comment.author }}</strong> - {{ comment.created_at|date:"j F Y" }}</p>
+                <p>{{ comment.content|linebreaksbr }}</p>
+            </div>
+            {% for reply in replies %}
+                <div class="reply">
+                    <p><strong>{{ reply.author }}</strong> - {{ reply.created_at|date:"j F Y" }}</p>
+                    <p>{{ reply.content|linebreaksbr }}</p>
+                </div>
+            {% endfor %}
+        {% empty %}
+            <p>No comments yet.</p>
+        {% endfor %}
+
 
         {% if user.is_staff %}
             <form method="post" class="no-background">
@@ -36,5 +55,4 @@
                 </div>
             </div>            
         {% endif %}
-    </div>
 {% endblock %}
