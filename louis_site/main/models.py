@@ -75,10 +75,17 @@ class BlogComment(models.Model):
     Model representing a comment on a blog post.
     """
     post = models.ForeignKey(BlogPost, related_name='comments', on_delete=models.CASCADE)
-    parent = models.ForeignKey('self', null=True, blank=True, related_name='replies', on_delete=models.CASCADE)
-    author = models.CharField(max_length=240) # update this to a user model later
-    content = models.TextField()
+    parent = models.ForeignKey('self', null=True, blank=True, related_name='replies', on_delete=models.CASCADE) # wont add this functionality yet
+    author = models.TextField()
+    content = models.TextField(max_length=240, help_text="Comment content must be less than 240 characters")
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"Comment by {self.author} on {self.post.title}"
+
+    def save(self, *args, **kwargs):
+        """Override save method to ensure content is not empty and does not exceed 240 characters.
+        """
+        if len(self.content) > 240:
+            raise ValidationError("Comment content must be less than 240 characters.")
+        super().save(*args, **kwargs)

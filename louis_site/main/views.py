@@ -3,8 +3,10 @@ from django.contrib import messages
 from django.contrib.auth.decorators import user_passes_test, login_required
 from django.urls import reverse
 
-from .forms import BlogPostForm
-from .models import BlogPost
+import datetime
+
+from .forms import BlogPostForm, CommentForm
+from .models import BlogPost, BlogComment
 
 # Helper functions
 
@@ -67,7 +69,30 @@ def blog_post(response, post_id):
     for com in top_level_comments:
         comment_dict[com] = [rep for rep in comments.filter(parent=com)]
 
-    return render(response, "main/blog_post_detail.html", {"post": post, "comments": comment_dict})
+    if response.method == "POST":
+        form = CommentForm(response.POST)
+        if form.is_valid():
+            content = form.cleaned_data.get("content")
+            user = response.user
+            author=user.first_name + " " + user.last_name
+            user_comments = BlogComment.objects.filter(author=author)
+            recent_comments = BlogComment.objects.filter(created_at__gte=(datetime.datetime.now()-datetime.timedelta(hours=24)))
+            if len(user_comments & recent_comments) > 5:
+                messages.error(response, "You have reached the limit of 5 comments in the last 24 hours.")
+                return redirect(reverse("post_detail", args=[post.post_id]))
+            comm = BlogComment(
+                post=post,
+                author=author,
+                content=content
+            )
+            comm.save()
+            messages.success(response, "Comment added successfully.")
+            return redirect(reverse("post_detail", args=[post.post_id]))
+
+    else:
+        form = CommentForm()
+
+    return render(response, "main/blog_post_detail.html", {"post": post, "comments": comment_dict, "form": form})
 
 def error(response):
     """

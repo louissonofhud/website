@@ -1,5 +1,5 @@
 from django import forms
-from .models import BlogPost
+from .models import BlogPost, BlogComment
 
 class BlogPostForm(forms.ModelForm):
     """
@@ -27,4 +27,18 @@ class BlogPostForm(forms.ModelForm):
             'image2': 'Upload an Image',
             'image3': 'Upload an Image',
             'image4': 'Upload an Image',
+        }
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = BlogComment
+        fields = [
+            "content"
+        ]
+        widgets = {
+            "content": forms.Textarea(attrs={'rows':4})
+        }
+
+        labels = {
+            "content": "",
         }
