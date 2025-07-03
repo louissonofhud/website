@@ -18,12 +18,7 @@
         {% endfor %}
     </div>
     {% if user.is_staff %}
-        <div class="post-actions">
-            <form method="post" class="no-background">
-                {% csrf_token %}
-                <button type="submit" class="btn btn-primary" name="Edit" value="{{ post.post_id }}">Edit Post</button>
-            </form>
-            
+        <div class="post-actions">            
             <div class="delete-button">
                 <button class="btn btn-danger" onclick="toggleDetails(this)" type="button">
                     Delete
@@ -43,9 +38,19 @@
     <div class="comments-section">
         <h2>Comments</h2>
         {% for comment, replies in comments.items %}
-            <div class="comment">
-                <p><strong>{{ comment.author }}</strong> - {{ comment.created_at|date:"j F Y" }}</p>
-                <p>{{ comment.content|linebreaksbr }}</p>
+            <div class="comment d-flex justify-content-between align-items-start p-2 border rounded">
+                <div>
+                    <p><strong>{{ comment.author }}</strong> - {{ comment.created_at|date:"j F Y" }}</p>
+                    <p>{{ comment.content|linebreaksbr }}</p>
+                </div>
+                {% if user.username == comment.author and not comment.deleted %}
+                    <form method="POST" enctype="multipart/form-data" class="ms-3">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger btn-sm" name="delete-comment" value="{{ comment.id }}">
+                            Delete
+                        </button>
+                    </form>
+                {% endif %}
             </div>
             {% for reply in replies %}
                 <div class="reply">
@@ -55,6 +60,7 @@
             {% endfor %}
         {% endfor %}
         {% if user.is_authenticated %}
+            <br>
             <h5>Add comment</h5>
             <form method="POST" enctype="multipart/form-data" class="comment-form">
                 {% csrf_token %}

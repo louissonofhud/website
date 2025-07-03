@@ -79,6 +79,7 @@ class BlogComment(models.Model):
     author = models.TextField()
     content = models.TextField(max_length=240, help_text="Comment content must be less than 240 characters")
     created_at = models.DateTimeField(auto_now_add=True)
+    deleted = models.BooleanField(default=False, help_text="Mark comment as deleted without removing it from the database")
 
     def __str__(self):
         return f"Comment by {self.author} on {self.post.title}"

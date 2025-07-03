@@ -218,6 +218,53 @@ main {
     transition: opacity 0.8s ease-out
   }
 
-  .alert.fade-out {
+.alert.fade-out {
     opacity: 0;
   }
+
+.comment {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 0px;
+    transition: box-shadow 0.2s ease-in-out;
+}
+
+.comment:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.comment p {
+    margin: 4px 0;
+    font-size: 15px;
+    color: #333;
+    line-height: 1.5;
+}
+
+.comment strong {
+    font-weight: 600;
+    color: #1a1a1a;
+}
+
+.comment form {
+    margin-left: 20px;
+}
+
+.comment .btn-danger {
+    background-color: #ff4d4f;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.comment .btn-danger:hover {
+    background-color: #d9363e;
+}

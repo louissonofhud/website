@@ -70,14 +70,29 @@ def blog_post(response, post_id):
         comment_dict[com] = [rep for rep in comments.filter(parent=com)]
 
     if response.method == "POST":
+        if response.POST.get("delete-comment"):
+            comment_id = response.POST.get("delete-comment")
+            comment_to_delete = BlogComment.objects.get(id=comment_id)
+            if comment_to_delete.author != response.user.username:
+                messages.error(response, "You can only delete your own comments.")
+                return redirect(reverse("post_detail", args=[post.post_id]))
+            comment_to_delete.content = "***THIS COMMENT HAS BEEN DELETED***"
+            comment_to_delete.deleted = True
+            comment_to_delete.save()
+            messages.success(response, "Comment deleted successfully.")
+            return redirect(reverse("post_detail", args=[post.post_id]))
+    
         form = CommentForm(response.POST)
         if form.is_valid():
             content = form.cleaned_data.get("content")
             user = response.user
-            author=user.first_name + " " + user.last_name
+            author = user.username
+            recent_user_comments = BlogComment.objects.filter(
+                author=author,
+                created_at__gte=timezone.now() - datetime.timedelta(hours=24)
+            )
             user_comments = BlogComment.objects.filter(author=author)
-            recent_comments = BlogComment.objects.filter(created_at__gte=(datetime.datetime.now()-datetime.timedelta(hours=24)))
-            if len(user_comments & recent_comments) > 5:
+            if len(recent_user_comments) > 5:
                 messages.error(response, "You have reached the limit of 5 comments in the last 24 hours.")
                 return redirect(reverse("post_detail", args=[post.post_id]))
             comm = BlogComment(
