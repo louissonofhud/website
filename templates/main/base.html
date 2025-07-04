@@ -23,19 +23,7 @@
                 <li><a href="/projects">Projects</a></li>
                 <li><a href="/blog">Blog</a></li>
                 <li><a href="/cv">CV - DUMMY</a></li>
-                <li><a href="/contact">Contact</a></li>
-                {% if user.is_authenticated %}
-                <li>
-                    <form method="POST" action="{%url 'logout' %}" class="no-background">
-                        {% csrf_token %}
-                        <button type="submit" class="logout-link">Logout</button>
-                    </form>
-                </li>
-                {% else %}
-                <li><a href="/login">Login</a></li>
-                {% endif %}
-                
-                
+                <li><a href="/contact">Contact</a></li>              
             </ul>
         </nav>
         
