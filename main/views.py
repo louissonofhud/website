@@ -127,7 +127,7 @@ def delete_post(response, issue_id):
     if response.method == "POST":
         if response.POST.get("delete-button") == "delete-confirmed":
             post_to_del = BlogPost.objects.get(id=issue_id)
-            post_to_del_images = post_to_del.all_images()
+            post_to_del_images = post_to_del.all_images
             for image in post_to_del_images:
                 if image and hasattr(image, 'path'):
                     try:
