@@ -14,5 +14,6 @@ urlpatterns = [
     path("blog/delete_post/<int:issue_id>", views.delete_post, name="delete_post"), # Delete a blog post
     path("blog/<str:post_id>", views.blog_post, name="post_detail"), # Display a specific blog post
     path("error/", views.error, name="error"), # Error page
+    path("download_cv/", views.download_cv, name="download_cv"), # Download CV
     # path("blog/edit_post/<int:post_id>", views.add_blog_post, name="edit_blog_post"), # Edit an existing blog post
 ] 

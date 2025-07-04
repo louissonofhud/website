@@ -2,8 +2,10 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import user_passes_test, login_required
 from django.urls import reverse
+from django.http import FileResponse
 
 import datetime
+import os
 
 from .forms import BlogPostForm, CommentForm
 from .models import BlogPost, BlogComment
@@ -137,3 +139,7 @@ def delete_post(response, issue_id):
             post_to_del.delete()
             messages.success(response, "Post deleted")
     return redirect(reverse("blog"))
+
+def download_cv(response):
+    filepath = os.path.join("media", "pdf", "Louis Hudson CV.pdf")
+    return FileResponse(open(filepath, 'rb'), as_attachment=True, filename='Louis Hudson CV.pdf')
