@@ -27,7 +27,7 @@ def create_blog_post(response):
 
     else:
         form = BlogPostForm()
-    return render(response, "main/blog_create_post.html", {"form": form})
+    return render(response, "blog/blog_create_post.html", {"form": form})
 
 def blog(response):
     """
@@ -39,7 +39,7 @@ def blog(response):
         posts = BlogPost.objects.all().order_by('-created_at')
     if response.method == "POST" and response.POST.get("Create") == "goto":
         return redirect(reverse("add_blog_post"))
-    return render(response, "main/blog_main.html", {"posts": posts})
+    return render(response, "blog/blog_main.html", {"posts": posts})
 
 
 def blog_post(response, post_id):
@@ -96,7 +96,7 @@ def blog_post(response, post_id):
     else:
         form = CommentForm()
 
-    return render(response, "main/blog_post_detail.html", {"post": post, "comments": comment_dict, "form": form})
+    return render(response, "blog/blog_post_detail.html", {"post": post, "comments": comment_dict, "form": form})
 
 def delete_post(response, issue_id):
     if response.method == "POST":
