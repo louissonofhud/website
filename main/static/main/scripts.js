@@ -24,3 +24,54 @@ setTimeout(() => {
     }, 800); // Match the CSS transition duration
   });
 }, 3000); // Wait 3 seconds before fading out
+
+document.addEventListener("DOMContentLoaded", function () {
+  const accordions = document.querySelectorAll(".accordion");
+
+  accordions.forEach(button => {
+    button.addEventListener("click", function () {
+      this.classList.toggle("selected");
+      const panel = this.nextElementSibling;
+      const isOpen = panel.classList.contains("open");
+
+      if (isOpen) {
+        panel.style.maxHeight = null;
+        panel.classList.remove("open");
+      } else {
+        panel.classList.add("open");
+
+        // Defer setting the height of this panel
+        requestAnimationFrame(() => {
+          panel.style.maxHeight = panel.scrollHeight + "px";
+
+          // After it's open, update parent panels
+          requestAnimationFrame(() => {
+            updateAncestorHeights(panel);
+            
+            // Safety pass: handle edge case where content reflows
+            setTimeout(() => {
+              if (panel) {
+                panel.style.maxHeight = panel.scrollHeight + "px";
+                updateAncestorHeights(panel);
+              }
+            }, 0);
+          });
+        });
+      }
+    });
+  });
+
+  function updateAncestorHeights(startFrom) {
+    let parent = startFrom?.parentElement;
+
+    while (parent) {
+      if (parent.classList.contains("panel")) {
+        // Safely reset and update height
+        parent.style.maxHeight = null;
+        parent.style.maxHeight = parent.scrollHeight + "px";
+      }
+      parent = parent.parentElement;
+    }
+  }
+});
+

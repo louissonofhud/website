@@ -20,74 +20,79 @@
       <h2>Professional Summary</h2>
       <p>Data Engineer at Bloomberg with four years of progressive experience—beginning as an apprentice at 18 and now building robust data pipelines in the 3rd Party Indices team. Expert in Python, SQL, ETL, data modelling, and CI/CD, with a proven track record of mentoring peers, leading apprentice-wide initiatives, and delivering high-quality data quality solutions.</p>
     </section>
-    <section id="skills">
-      <h2>Technical Skills</h2>
+    <button class="accordion">Technical Skills</button>
+    <div class="panel">
       <ul>
         <li><strong>Programming:</strong> Python, SQL</li>
         <li><strong>Tools &amp; Frameworks:</strong> Git, Bloomberg Terminal, Django</li>
         <li><strong>Data &amp; Engineering:</strong> ETL development, data modelling, testing, CI/CD pipelines</li>
       </ul>
-    </section>
-    <section id="experience">
-      <h2>Professional Experience</h2>
+    </div>
+    <button class="accordion">Professional Experience</button>
+    <div class="panel">
       <div class="roles">
-        <h3>Bloomberg LP</h3>
+        <h3>Bloomberg LP, London</h3>
           <div class="role">
-            <h4>Data Engineer, 3rd Party Indices Team</h4>
-            <time>Jun 2025 – Present</time>
-            <ul>
-              <li>Design and implement scalable data pipelines for third-party index data.</li>
-              <li>Collaborate with analysts to translate business requirements into reliable ETL workflows and automated quality checks.</li>
-              <li>Integrate new benchmark data sources into the Bloomberg Terminal, ensuring seamless onboarding and validation.</li>
-            </ul>
-          </div>
-          <div class="role">
-            <h4>Apprentice Data Analyst, 3rd Party Indices Team</h4>
-            <time>Nov 2022 – Jun 2025</time>
-            <ul>
-              <li>Managed end-to-end onboarding of 3rd party index data (including Stoxx, Euronext and Morningstar) onto the Bloomberg Terminal, coordinating across vendor and internal teams.</li>
-              <li>Led the design and delivery of multiple data quality solutions:</li>
+            <button class="accordion">Data Engineer, 3rd Party Indices Team <time>(Jul 2025 – Present)</time></button>
+            <div class="panel">
               <ul>
-                <li>Machine learning-based outlier detection model for Bloomberg’s index fundamental financials dataset, enabling proactive data quality assurance at scale.</li>
-                <li>Accuracy measurement service for pricing datasets to monitor data quality across indices.</li>
-                <li>Random-sampling data-validation service to detect anomalies proactively.</li>
+                <li>Design and implement scalable data pipelines for third-party index data.</li>
+                <li>Collaborate with analysts to translate business requirements into reliable ETL workflows and automated quality checks.</li>
+                <li>Integrate new benchmark data sources into the Bloomberg Terminal, ensuring seamless onboarding and validation.</li>
               </ul>
-            </ul>
+            </div>
           </div>
           <div class="role">
-            <h4>Apprentice Financial Data Analyst</h4>
-            <time>Sep 2021 – Nov 2022</time>
-            <ul>
-              <li><strong>Back-up Tech Lead:</strong> Contributed production Python code and debugged internal tools; mentored colleagues on Python best practices and Git workflows.</li>
-              <li>Authored a news article on the Bloomberg Terminal covering the UK Conservative leadership election - <a href="https://www.bloomberg.com/uk">{NSN RHQJ6QT0G1LL}</a>.</li>
-              <li>Led new-hire training sessions on the Bloomberg data model.</li>
-              <li>Provided in-depth customer support, resolving client inquiries on Bloomberg Terminal data in a timely manner.</li>
-            </ul>
+            <button class="accordion">Apprentice Data Analyst, 3rd Party Indices Team <time>(Nov 2022 – Jul 2025)</time></button>
+            <div class="panel">
+              <ul>
+                <li>Managed end-to-end onboarding of 3rd party index data (including Stoxx, Euronext and Morningstar) onto the Bloomberg Terminal, coordinating across vendor and internal teams.</li>
+                <li>Led the design and delivery of multiple data quality solutions:</li>
+                <ul>
+                  <li>Machine learning-based outlier detection model for Bloomberg’s index fundamental financials dataset, enabling proactive data quality assurance at scale.</li>
+                  <li>Accuracy measurement service for pricing datasets to monitor data quality across indices.</li>
+                  <li>Random-sampling data-validation service to detect anomalies proactively.</li>
+                </ul>
+              </ul>
+            </div>
           </div>
-      </div>
-    </section>
-      <section id="education">
-      <h2>Education</h2>
+          <div class="role">
+            <button class="accordion">Apprentice Financial Data Analyst <time>(Sep 2021 – Nov 2022)</time></button>
+            <div class="panel">
+              <ul>
+                <li><strong>Back-up Tech Lead:</strong> Contributed production Python code and debugged internal tools; mentored colleagues on Python best practices and Git workflows.</li>
+                <li>Authored a news article on the Bloomberg Terminal covering the UK Conservative leadership election - <a href="https://www.bloomberg.com/uk">{NSN RHQJ6QT0G1LL}</a>.</li>
+                <li>Led new-hire training sessions on the Bloomberg data model.</li>
+                <li>Provided in-depth customer support, resolving client inquiries on Bloomberg Terminal data in a timely manner.</li>
+              </ul>
+            </div>
+          </div>
+       </div>
+    </div>
+    <button class="accordion">Education</button>
+    <div class="panel">
       <p><strong>University of Exeter</strong>, Exeter, UK<br>
       BSc Computer Science, First Class Honours<br>
       Graduated June 2025</p>
       <p><strong>A-Levels:</strong> Mathematics (A*), Computer Science (A*), Spanish (A)</p>
-    </section>
-    <section id="extracurricular">
-      <h2>Leadership &amp; Extracurricular</h2>
+    </div>
+    <button class="accordion">Leadership &amp; Extracurricular</button>
+    <div class="panel">
       <p><strong>Apprentice Committee Lead</strong> (Final Year)<br>
       Organized social and professional events for Bloomberg apprentices, fostering community and peer support across cohorts.</p>
-    </section>
-    <section id="projects">
-      <h2>Projects</h2>
+    </div>
+    <button class="accordion">Projects</button>
+    <div class="panel">
       <p>(Insert your key projects here with titles, tech stack, descriptions, and links.)</p>
-    </section>
-    <section id="languages">
-      <h2>Languages</h2>
+    </div>
+    <button class="accordion">Languages</button>
+    <div class="panel">
       <ul>
         <li>Spanish: Conversational</li>
       </ul>
-    </section>
+    </div>
 {% endblock %}
+
+
 </body>
 </html>
