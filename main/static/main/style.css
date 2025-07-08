@@ -303,7 +303,7 @@ h2 {
     padding-bottom: 0.5rem
 }
 .roles {
-    margin: 1rem 0
+    margin: 0.5rem 0
 }
 .role {
     margin-bottom: 1.5rem
@@ -319,4 +319,58 @@ footer {
     padding: 1rem 0;
     background: #f8f8f8;
     font-size: 0.9rem;
+}
+
+/* Accordion Button Styling */
+.accordion {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  text-align: left;
+  border: none;
+  outline: none;
+  transition: background-color 0.3s ease;
+  font-size: 16px;
+  font-weight: bold;
+  margin: 5px 0;
+  position: relative;
+}
+
+/* Accordion Button Hover + Selected */
+.accordion:hover {
+  background-color: #ccc;
+}
+
+/* Panel Container (collapsible section) */
+.panel {
+  padding: 0 18px;
+  background-color: white;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+}
+
+/* Indicator Icon */
+.accordion::after {
+  content: '\02795'; /* plus sign */
+  font-size: 13px;
+  color: #777;
+  float: right;
+  margin-left: 5px;
+}
+
+.accordion.selected::after {
+  content: "\2796"; /* minus sign */
+}
+
+/* Optional: spacing between accordion sections */
+.panel p, .panel ul, .panel li {
+  margin: 8px 0;
+}
+
+/* Optional: nested panels have a subtle left indent */
+.panel .accordion {
+  margin-left: 12px;
 }
