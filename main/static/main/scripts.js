@@ -61,17 +61,17 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  function updateAncestorHeights(startFrom) {
-    let parent = startFrom?.parentElement;
+function updateAncestorHeights(startFrom) {
+  let parent = startFrom?.parentElement;
 
-    while (parent) {
-      if (parent.classList.contains("panel")) {
-        // Safely reset and update height
-        parent.style.maxHeight = null;
-        parent.style.maxHeight = parent.scrollHeight + "px";
-      }
-      parent = parent.parentElement;
+  while (parent) {
+    if (parent.classList.contains("panel")) {
+      let subItemHeight = parseFloat(startFrom.style.maxHeight) || 0;
+      let scrollHeight = parseFloat(parent.scrollHeight) || 0;
+      parent.style.maxHeight = scrollHeight + subItemHeight + "px";
     }
+    parent = parent.parentElement;
   }
+}
 });
 
